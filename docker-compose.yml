@@ -1,0 +1,44 @@
+networks:
+  laravel:
+    driver: bridge
+
+services:
+  php:
+    build:
+        context: .
+        dockerfile: Dockerfile  
+    container_name: php
+    volumes:
+      - ./laravel/:/var/www
+    working_dir: /var/www
+    networks:
+      - laravel
+    expose:
+      - "9000"
+
+  nginx:
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile  
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./laravel/:/var/www
+      - ./nginx/conf/default.conf:/etc/nginx/default.conf
+      - ./nginx-logs:/var/log/nginx
+    networks:
+      - laravel
+    depends_on:
+      - php
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    networks:
+      - laravel
+    ports:
+      - "6379:6379"
+
+
+
