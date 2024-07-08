@@ -8,7 +8,7 @@
 
 ### 1. Costruire e Avviare i Container Docker
 
-Nella radice del tuo progetto, eseguire i seguenti comandi Docker:
+Nella radice del progetto, eseguire i seguenti comandi Docker:
 
 ```
 docker compose build
