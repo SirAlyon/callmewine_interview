@@ -29,7 +29,7 @@ class CryptocurrencyController extends Controller
                 $alert['message'] = $this->getNoDataMessage();
                 $alert['color'] = 'red';
 
-                return view('app', ['data' => [], 'alert' => $alert]);
+                return view('index', ['data' => [], 'alert' => $alert]);
             }
             //API fallita, uso i dati di redis
             $alert['message'] = $this->getApiErrorMessage();
@@ -40,7 +40,7 @@ class CryptocurrencyController extends Controller
             $alert['color'] = 'green';
         }
 
-        return view('app', ['data' => $cryptos,'alert' => $alert]);
+        return view('index', ['data' => $cryptos,'alert' => $alert]);
     }
 
     // Metodo privato per ottenere il messaggio di successo
