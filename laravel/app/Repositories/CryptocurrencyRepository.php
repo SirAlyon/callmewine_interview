@@ -9,11 +9,13 @@ class CryptocurrencyRepository
 {
     protected $redisClient;
 
+    // Costruttore che inietta la dipendenza di PredisClient
     public function __construct(PredisClient $redisClient)
     {
         $this->redisClient = $redisClient;
     }
 
+    // Salva una criptovaluta nel database Redis
     public function save(Cryptocurrency $crypto)
     {
         $this->redisClient->set("crypto:{$crypto->id}", $crypto->serialize());
@@ -21,9 +23,16 @@ class CryptocurrencyRepository
         $this->redisClient->expire("crypto:{$crypto->id}", 3600);
     }
 
+    // Recupera tutte le criptovalute dal database Redis
     public function getAll()
     {
         $cryptoIds = $this->redisClient->smembers('cryptos');
+
+        if (empty($cryptoIds)) {
+            // Se non ci sono dati su Redis, restituisci un array vuoto
+            return [];
+        }
+        
         $cryptos = [];
 
         foreach ($cryptoIds as $id) {
@@ -33,6 +42,7 @@ class CryptocurrencyRepository
         return $cryptos;
     }
 
+    // Recupera una criptovaluta per ID dal database Redis
     public function getById($id)
     {
         if ($this->redisClient->exists("crypto:$id")) {
@@ -42,6 +52,7 @@ class CryptocurrencyRepository
         return null;
     }
 
+    // Pulisce tutte le criptovalute dal database Redis
     public function clearAll()
     {
         $cryptoIds = $this->redisClient->smembers('cryptos');
