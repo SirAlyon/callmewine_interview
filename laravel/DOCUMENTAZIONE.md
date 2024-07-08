@@ -31,7 +31,6 @@ CMC_API_KEY=c3f841e7-0fff-4d8e-985f-248d29747571
 
 ```
 
-
 ### Installazione delle Dipendenze PHP
 
 Una volta avviati i cointainer, procedere ad installare le varie dipendenze.
@@ -46,21 +45,24 @@ ed eseguire i comandi necessari per le dipendenze e l'avvio di Laravel:
 ```
 composer install
 npm install
-npm run dev
 php artisan key:generate
-php artisan migrate //opzionale il db in questo caso non è utilizzato
+
+//opzionale il db in questo caso non è utilizzato
+php artisan migrate 
 
 chown -R www-data:www-data /var/www/storage
 chown -R www-data:www-data /var/www/bootstrap/cache
 
-chmod -R 777 storage bootstrap/cache //opzionale
+//opzionale
+chmod -R 777 storage bootstrap/cache 
+
+npm run dev
 ```
 
 ### Accesso all'Applicazione
-Ora puoi accedere alla tua applicazione tramite il browser all'indirizzo:
 
 E' possibile accedere all'applicazione all'indirizzo: http://localhost
 
-(testato su MacOS e Linux)
+(testato su MacOS e Ubuntu)
 
 

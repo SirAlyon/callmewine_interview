@@ -3,7 +3,7 @@
 ## Struttura delle Cartelle
 
 - **app/Http/Controllers**: Contiene i controller che gestiscono le richieste HTTP.
-- **app/Models**: Contiene il modello Cryptocurrency (in questo caso, per semplicità, ho utilizzato un modello 'nonEloquent', non avendo la necessità di salvarli in un db).
+- **app/Models**: Contiene il modello Cryptocurrency (in questo caso, per semplicità, ho utilizzato un modello 'nonEloquent', non avendo la necessità di salvare nel db).
 - **app/Services**: Contiene la logica di business che non si adatta bene ai controller o ai modelli.
 - **app/Repositories**: Contiene il repository che gestisce la logica di accesso ai dati.
 - **app/Providers**: Contiene il service provider che è responsabile di registrare i servizi nel container di Laravel.
@@ -384,22 +384,6 @@ Route::get('/', [CryptocurrencyController::class, 'index'])->middleware(CheckCou
 
 In alternativa, è possibile utilizzare le variabili $_SERVER di PHP per ottenere l'indirizzo IP dell'utente e determinare la sua localizzazione.
 
-```
-class CheckCountryPHP
-{
-    public function handle(Request $request, Closure $next)
-    {
-        $ip = $request->ip();
-        $locationData = geoip($ip); // Usa un servizio di geolocalizzazione IP
-
-        if ($locationData && $locationData['country'] === 'Italy') {
-            return $next($request);
-        }
-
-        return response()->json(['error' => 'Accesso non autorizzato.'], 403);
-    }
-}
-```
 
 ### Conclusione
 
