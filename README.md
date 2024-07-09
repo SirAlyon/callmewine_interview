@@ -57,7 +57,6 @@ chmod -R 777 storage bootstrap/cache //opzionale
 ```
 
 ### Accesso all'Applicazione
-Ora puoi accedere alla tua applicazione tramite il browser all'indirizzo:
 
 E' possibile accedere all'applicazione all'indirizzo: http://localhost
 
